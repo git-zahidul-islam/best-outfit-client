@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "../../shared/socialLogin/SocialLogin";
 
 
 const SignIn = () => {
@@ -52,6 +53,10 @@ const SignIn = () => {
                         </div>
                         <small>New here <Link className="text-base font-medium text-indigo-700" to={'/sign-up'}>Create an account</Link></small>
                     </form>
+                    <div className="border-2 border-green-400 my-3"></div>
+                        <div className="flex justify-center">
+                            <SocialLogin/>
+                        </div>
                     
                 </div>
                 <div className="text-center w-1/2 lg:text-left">

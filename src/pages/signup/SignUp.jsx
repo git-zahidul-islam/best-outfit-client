@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "../../shared/socialLogin/SocialLogin";
 
 const SignUp = () => {
     const axiosPublic = useAxiosPublic()
@@ -37,11 +38,11 @@ const SignUp = () => {
                             .then(res => {
                                 if (res.data.insertedId) {
                                     console.log("id is inserted");
+                                    navigate('/')
                                 }
                             })
                     })
                     .catch(error => console.error(error))
-                navigate('/')
             })
             .catch(error => {
                 console.error(error);
@@ -96,7 +97,12 @@ const SignUp = () => {
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="SignUp" />
                         </div>
+                        
                     </form>
+                    <div className="border-2 border-green-400 my-3"></div>
+                        <div className="flex justify-center">
+                            <SocialLogin/>
+                        </div>
                 </div>
             </div>
         </div>
