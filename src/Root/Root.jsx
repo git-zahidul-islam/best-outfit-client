@@ -6,7 +6,7 @@ import Footer from "../shared/footer/Footer";
 
 const Root = () => {
     return (
-        <div className="w-full">
+        <div className="w-full bg-gray-400/40">
             <NavBer></NavBer>
             <Outlet></Outlet>
             <Footer/>

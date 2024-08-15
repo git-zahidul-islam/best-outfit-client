@@ -8,7 +8,7 @@ const NavBer = () => {
   const { user , logout } = useAuth()
 
   return (
-    <nav className="bg-blue-600 p-4">
+    <nav className="bg-red-600/60 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <img src="/best-outfit.png" alt="Logo" className="w-16 mr-2" />
@@ -48,13 +48,18 @@ const NavBer = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="md:hidden">
-          <a href="#home" className="block text-white py-2">Home</a>
-          <a href="#login" className="block text-white py-2">Login</a>
+        <div className="md:hidden flex flex-col items-center">
+          <Link href="/" className="block text-white py-2">Home</Link>
+          {
+            user ? 
+            <button onClick={()=> logout()} className='text-white hover:text-gray-300'>Logout</button>
+            :
+          <Link to="/sign-in" className="text-white hover:text-gray-300">Sign In</Link>
+          }
           <img
             src={user ? user.photoURL : defaultImage }
             alt="User"
-            className="h-8 w-8 rounded-full border-2 border-white"
+            className="h-8 w-8 rounded-full border-2 border-white mt-4"
           />
         </div>
       )}

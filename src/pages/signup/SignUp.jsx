@@ -29,20 +29,16 @@ const SignUp = () => {
                 userUpdateProfile(name, photo)
                     .then(() => {
                         console.log("photo update");
-                        // const userInfo = {
-                        //     name: name,
-                        //     email: email,
-                        // }
-                        // axiosPublic.post('/users', userInfo)
-                        //     .then(res => {
-                        //         if (res.data.insertedId) {
-                        //             Swal.fire({
-                        //                 title: "Good job!",
-                        //                 text: "login successfully!",
-                        //                 icon: "success"
-                        //             });
-                        //         }
-                        //     })
+                        const userInfo = {
+                            name: name,
+                            email: email,
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log("id is inserted");
+                                }
+                            })
                     })
                     .catch(error => console.error(error))
                 navigate('/')
