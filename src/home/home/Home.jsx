@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import ShopCard from "../../components/ShopCard";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Home = () => {
+  const axiosPublic = useAxiosPublic()
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -16,10 +17,10 @@ const Home = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/products", {
+      const response = await axiosPublic.get("/products", {
         params: {
           page,
-          limit: 8, // Number of products per page
+          limit: 6, // Number of products per page
           search,
           brand,
           category,
@@ -42,15 +43,8 @@ const Home = () => {
 
   return (
     <div className="md:w-[92%] w-[95%] mx-auto">
-      <h1 className="text-center text-2xl font-semibold mt-6">
-        Welcome to Tech-Shop...
-      </h1>
-      <h1 className="text-center  text-lg font-semibold mb-6">
-        Here all our products are displayed!
-      </h1>
-
       {/* Search and Filters */}
-      <div className="flex justify-center my-8">
+      <div className="flex md:flex-row flex-col justify-center my-8">
         <input
           type="text"
           placeholder="Search by product name..."
@@ -83,26 +77,27 @@ const Home = () => {
           placeholder="Min Price"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
-          className="border p-2 rounded mb-2 mr-2"
+          className="border p-2 rounded mb-2 mr-2 md:w-40 w-full"
         />
         <input
           type="number"
           placeholder="Max Price"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
-          className="border p-2 rounded mb-2 mr-2"
+          className="border p-2 rounded mb-2 mr-2 md:w-40 w-full"
         />
-        {/* sort by start */}
+
+        {/* Sort By Dropdown */}
         <select
           onChange={(e) => setSortBy(e.target.value)}
           className="border p-2 rounded mb-2 mr-2"
         >
           <option value="">Sort By</option>
           <option value="price">Price</option>
-          <option value="creationDate">time filter</option>
+          <option value="creationDate">Date</option> {/* Updated Label */}
         </select>
 
-        {/* Conditionally render sort options based on selected sortBy */}
+        {/* Conditionally Render Sort Options */}
         {sortBy === "price" && (
           <select
             onChange={(e) => setSortOrder(e.target.value)}
@@ -113,7 +108,15 @@ const Home = () => {
           </select>
         )}
 
-        {/*  */}
+        {sortBy === "creationDate" && (
+          <select
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="border p-2 rounded mb-2"
+          >
+            <option value="desc">Newest to Oldest</option>
+            <option value="asc">Oldest to Newest</option>
+          </select>
+        )}
 
       </div>
 
@@ -121,7 +124,6 @@ const Home = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8">
         {products.length > 0 ? (
           products.map((product) => (
-            // <Card key={product._id} product={product} />
             <ShopCard
               key={product._id}
               brandName={product?.brandName}
@@ -139,11 +141,11 @@ const Home = () => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="mt-4 flex justify-center items-center">
+      <div className="flex justify-center items-center my-5">
         <button
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
-          className="bg-blue-800 text-white border px-3 py-1 mx-1 rounded"
+          className="bg-blue-600 text-white border px-3 py-1 mx-1 rounded"
         >
           Previous
         </button>
@@ -151,7 +153,7 @@ const Home = () => {
         <button
           onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={page === totalPages}
-          className="border px-3 py-1 mx-1 rounded bg-blue-800 text-white"
+          className="border px-3 py-1 mx-1 rounded bg-blue-600 text-white"
         >
           Next
         </button>
