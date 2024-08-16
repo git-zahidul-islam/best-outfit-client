@@ -1,4 +1,7 @@
-const ShopCard = ({ title, brandName, category, dateAndTime, description, price, image }) => {
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+
+const ShopCard = ({ title, brandName, category, dateAndTime, description, price, image,ratings }) => {
 
   // eslint-disable-next-line react/prop-types
   const date = dateAndTime.split('T')[0];
@@ -32,6 +35,13 @@ const ShopCard = ({ title, brandName, category, dateAndTime, description, price,
       </div>
       <div className="flex items-center justify-between px-4 py-2 bg-gray-900">
         <h1 className="text-lg font-bold text-white">${price}</h1>
+        
+        <Rating
+                style={{ maxWidth: 120 }}
+                value={ratings}
+                readOnly
+              />
+
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => {
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -101,27 +101,29 @@ const Home = () => {
           <option value="creationDate">Date</option> {/* Updated Label */}
         </select>
 
-        {/* Conditionally Render Sort Options */}
-        {sortBy === "price" && (
+        <div>
           <select
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="border p-2 rounded mb-2"
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value === "price-asc") {
+                setSortBy("price");
+                setSortOrder("asc");
+              } else if (value === "price-desc") {
+                setSortBy("price");
+                setSortOrder("desc");
+              } else if (value === "date-desc") {
+                setSortBy("creationDate");
+                setSortOrder("desc");
+              }
+            }}
+            className="border border-white p-2 rounded mb-2 mr-2"
           >
-            <option value="asc">Low to High</option>
-            <option value="desc">High to Low</option>
+            <option value="">Sort By</option>
+            <option value="price-asc">Price (Low to High)</option>
+            <option value="price-desc">Price (High to Low)</option>
+            <option value="date-desc">Date (Newest)</option>
           </select>
-        )}
-
-        {sortBy === "creationDate" && (
-          <select
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="border p-2 rounded mb-2"
-          >
-            <option value="desc">Newest to Oldest</option>
-            <option value="asc">Oldest to Newest</option>
-          </select>
-        )}
-
+        </div>
       </div>
 
       {/* Product Cards */}
@@ -137,6 +139,7 @@ const Home = () => {
               price={product?.price}
               image={product?.productImage}
               title={product?.productName}
+              ratings={product?.ratings}
             />
           ))
         ) : (
