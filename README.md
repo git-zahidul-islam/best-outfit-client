@@ -1,4 +1,4 @@
-### Project Name: Tech-Shop (https://best-outfit-client.vercel.app)
+### Project Name: Best Outfit (https://best-outfit-client.vercel.app)
 
 ## Project Overview
 
