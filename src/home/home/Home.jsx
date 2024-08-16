@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ShopCard from "../../components/ShopCard";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const axiosPublic = useAxiosPublic()
@@ -43,6 +44,9 @@ const Home = () => {
 
   return (
     <div className="md:w-[92%] w-[95%] mx-auto">
+      <Helmet>
+        <title>Best Outfit | Home</title>
+      </Helmet>
       {/* Search and Filters */}
       <div className="flex md:flex-row flex-col justify-center my-8">
         <input

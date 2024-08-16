@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../../shared/socialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
     const axiosPublic = useAxiosPublic()
@@ -11,7 +12,6 @@ const SignUp = () => {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm()
 
@@ -53,6 +53,9 @@ const SignUp = () => {
 
     return (
         <div className="hero min-h-screen bg-base-200">
+            <Helmet>
+                <title>Best Outfit | Sign Up</title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Register now!</h1>
