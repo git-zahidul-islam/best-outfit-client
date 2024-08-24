@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ShopCard from "../../components/ShopCard";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
+import AddShow from "../../components/AddShow";
 
 const Home = () => {
   const axiosPublic = useAxiosPublic();
@@ -126,6 +127,9 @@ const Home = () => {
         </div>
       </div>
 
+    {/* ad section */}
+      <AddShow/>
+      
       {/* Product Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8">
         {products.length > 0 ? (
