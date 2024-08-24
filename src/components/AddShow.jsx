@@ -1,29 +1,17 @@
 import { useEffect } from "react";
+import { loadAd } from "./ad";
 
 const AddShow = () => {
     useEffect(() => {
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = '//www.topcreativeformat.com/6f257b46bf5627156750307c9d72227d/invoke.js';
-        
-        const atOptions = {
-          key: '6f257b46bf5627156750307c9d72227d',
-          format: 'iframe',
-          height: 50,
-          width: 320,
-          params: {}
-        };
-    
-        script.onload = () => {
-          window.atOptions = atOptions;
-        };
-    
-        document.body.appendChild(script);
-    
+        loadAd(); 
+
         return () => {
-          document.body.removeChild(script);
+          const adDiv = document.getElementById('ad-container');
+          if (adDiv && adDiv.firstChild) {
+              adDiv.removeChild(adDiv.firstChild);
+          }
         };
-      }, []);
+    }, []);
 
     return (
         <div className="md:h-20 h-14 md:w-[400px] w-60 my-5 mx-auto">
