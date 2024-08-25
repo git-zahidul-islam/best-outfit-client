@@ -3,6 +3,7 @@ import ShopCard from "../../components/ShopCard";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
 import AddShow from "../../components/AddShow";
+import Banner from "../../components/Banner";
 
 const Home = () => {
   const axiosPublic = useAxiosPublic();
@@ -48,6 +49,9 @@ const Home = () => {
       <Helmet>
         <title>Best Outfit | Home</title>
       </Helmet>
+      {/* banner added here */}
+      <Banner/>
+
       {/* Search and Filters */}
       <div className="flex md:flex-row flex-col justify-center my-8">
         <input
