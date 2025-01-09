@@ -12,7 +12,7 @@ const NavBer = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to={'/'} className="flex items-center">
           <img src="/logo.png" alt="Logo" className="md:w-16 w-12 mr-2" />
-          <span className="text-white text-lg font-semibold">Best Outfit</span>
+          <span className="text-white text-lg font-semibold">Best Outfit Test for</span>
         </Link>
         <div className="hidden md:flex items-center space-x-4">
           <Link to="/" className="text-white hover:text-gray-300">Home</Link>
